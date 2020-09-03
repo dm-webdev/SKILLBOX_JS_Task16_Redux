@@ -1,7 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import { createComment } from "../redux/action"
+import { createComment, showAlert } from "../redux/action";
+
+import { Alert } from "./Alert";
 
 class FormComment extends React.Component {
   constructor(props) {
@@ -16,6 +18,13 @@ class FormComment extends React.Component {
   submitHandler = (event) => {
     event.preventDefault();
 
+    const {name} = this.state.name;
+    console.log(this.state.name)
+
+    if (!(this.state.name.trim() && this.state.body.trim())) {
+      return this.props.showAlert("Fields should be filled");
+    }
+    
     const newComment = {
       id: Date.now().toString(),
       name: this.state.name,
@@ -66,13 +75,12 @@ class FormComment extends React.Component {
             id="fullName"
             aria-describedby="fullNameHelp"
             autoFocus
-            // required
             name="name"
             value={this.state.name}
             onChange={this.changeInputHandler}
             
           />
-          <small id="fullNameHelp" className="form-text text-muted">
+          <small id="fullNameHelp" className="form-text text-muted ">
             Enter your name
           </small>
         </div>
@@ -84,26 +92,31 @@ class FormComment extends React.Component {
             className="form-control"
             id="textComment"
             aria-describedby="textCommentHelp"
-            // required
             name="body"
             value={this.state.body}
             onChange={this.changeInputHandler}
           />
           <small id="textCommentHelp" className="form-text text-muted">
-            Write your comment
+            Write your comment           
           </small>
         </div>
 
         <button type="submit" className="btn btn-outline-success">
           Submit
         </button>
+        <Alert text={this.props.alert} />
       </form>
     );
   }
 };
 
 const mapDispatchToProps = {
-  createComment
+  createComment, showAlert
 };
 
-export default connect(null, mapDispatchToProps)(FormComment);
+
+const mapStateToProps = state => ({
+  alert: state.app.alert,
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(FormComment);

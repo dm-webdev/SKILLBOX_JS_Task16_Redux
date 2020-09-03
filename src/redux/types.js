@@ -1,2 +1,5 @@
 export const CREATE_COMMENT = "COMMENT/CREATE_COMMENT";
 export const DEL_COMMENT = "COMMENT/DEL_COMMENT";
+
+export const SHOW_ALERT = "APP/SHOW_ALERT";
+export const HIDE_ALERT = "APP/HIDE_ALERT";

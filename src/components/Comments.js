@@ -10,7 +10,7 @@ const Comments = ({ comments }) => {
         upload comments
       </button>
 
-      {comments.length === 0 ? (
+      {comments.comments.length === 0 ? (
         <p className="alert alert-warning">
           There are currently no comments. You can download them by clicking on
           the button "upload comments".
@@ -19,7 +19,7 @@ const Comments = ({ comments }) => {
         ""
       )}
 
-      {comments.map((comment) => (
+      {comments.comments.map((comment) => (
         <Comment comment={comment} key={comment.id} />
       ))}
     </div>
@@ -27,7 +27,6 @@ const Comments = ({ comments }) => {
 };
 
 const mapStateToProps = (state) => {
-  console.log(state.comments);
   return {
     comments: state.comments,
   };

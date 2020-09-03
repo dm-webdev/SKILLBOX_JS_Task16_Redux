@@ -5,25 +5,10 @@ import { delComment } from "../redux/action";
 export default ({ comment }) => {
 
   const dispatch = useDispatch();
-  // const del = useSelector((state) => state.comments)
-
   
   const onClickHandler = (event) => {
-    console.log(comment.id);
-    console.log(comment);
-    // console.log(del);
     dispatch(delComment(comment.id));
-    // delComment(false)
   }
-
-  // }
-
-  // this.setState({comment: 'Привет'});
-  // this.setState(function(state, props) {
-  //   return {
-  //     counter: state.counter + props.increment
-  //   };
-  // });
 
   return (
     <div
