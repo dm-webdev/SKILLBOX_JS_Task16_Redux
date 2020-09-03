@@ -1,61 +1,49 @@
 import React from "react";
 import { connect } from "react-redux";
-
 import { createComment, showAlert } from "../redux/action";
-
-import { Alert } from "./Alert";
+import { Alert } from "./app/Alert";
 
 class FormComment extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       name: "",
-      body: ""
+      body: "",
     };
   }
-
 
   submitHandler = (event) => {
     event.preventDefault();
 
-    const {name} = this.state.name;
-    console.log(this.state.name)
-
     if (!(this.state.name.trim() && this.state.body.trim())) {
       return this.props.showAlert("Fields should be filled");
     }
-    
+
     const newComment = {
       id: Date.now().toString(),
       name: this.state.name,
       email: new Date().toLocaleString(),
-      body: this.state.body
-    }
+      body: this.state.body,
+    };
 
-    console.log(newComment);
-    console.log(this.props)
-    
-    // console.log(this.state.createComment.createComment());
     this.props.createComment(newComment);
 
     this.setState({
       name: "",
-      body: ""
+      body: "",
     });
-  }
+  };
 
-
-
-
-  changeInputHandler = event => {
+  changeInputHandler = (event) => {
     console.log(event.target.name + "-" + event.target.value);
-    event.persist()
-    this.setState( prev => ({...prev, ...{
-      [event.target.name]: event.target.value
-    }}))
-  }
-
-
+    event.persist();
+    this.setState((prev) => ({
+      ...prev,
+      ...{
+        [event.target.name]: event.target.value,
+      },
+    }));
+  };
 
   render() {
     return (
@@ -78,7 +66,6 @@ class FormComment extends React.Component {
             name="name"
             value={this.state.name}
             onChange={this.changeInputHandler}
-            
           />
           <small id="fullNameHelp" className="form-text text-muted ">
             Enter your name
@@ -97,26 +84,27 @@ class FormComment extends React.Component {
             onChange={this.changeInputHandler}
           />
           <small id="textCommentHelp" className="form-text text-muted">
-            Write your comment           
+            Write your comment
           </small>
         </div>
 
         <button type="submit" className="btn btn-outline-success">
           Submit
         </button>
-        <Alert text={this.props.alert} />
+
+        {this.props.alert === null ? "" : <Alert text={this.props.alert} />} {console.log(this.props)}
       </form>
     );
   }
-};
+}
 
 const mapDispatchToProps = {
-  createComment, showAlert
+  createComment,
+  showAlert,
 };
 
-
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   alert: state.app.alert,
-})
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(FormComment);
