@@ -3,12 +3,11 @@ import { useDispatch } from "react-redux";
 import { delComment } from "../redux/action";
 
 export default ({ comment }) => {
-
   const dispatch = useDispatch();
-  
+
   const onClickHandler = (event) => {
     dispatch(delComment(comment.id));
-  }
+  };
 
   return (
     <div

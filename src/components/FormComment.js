@@ -71,7 +71,6 @@ class FormComment extends React.Component {
             Enter your name
           </small>
         </div>
-
         <div className="form-group">
           <label htmlFor="textComment">Comment</label>
           <input
@@ -87,12 +86,10 @@ class FormComment extends React.Component {
             Write your comment
           </small>
         </div>
-
         <button type="submit" className="btn btn-outline-success">
           Submit
         </button>
-
-        {this.props.alert === null ? "" : <Alert text={this.props.alert} />} {console.log(this.props)}
+        {this.props.alert === null ? "" : <Alert text={this.props.alert} />}{" "}
       </form>
     );
   }

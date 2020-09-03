@@ -25,14 +25,12 @@ export default () => {
             <h5>Leave a comment</h5>
 
             <FormComment />
-
           </div>
 
           <div className="col">
             <h5>Comments</h5>
 
             <Comments />
-            
           </div>
         </div>
       </div>

@@ -9,8 +9,8 @@ export default () => {
       </header>
 
       <main>
-       <Card />
+        <Card />
       </main>
     </div>
   );
-}
+};
